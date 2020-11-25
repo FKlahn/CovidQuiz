@@ -4,6 +4,7 @@ import br.com.ulbra.controller.UsuarioController;
 import br.com.ulbra.model.Usuario;
 
 import javax.swing.*;
+import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -16,11 +17,7 @@ public class MenuInicialView extends javax.swing.JFrame {
 
     public static void main(String[] args) {
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MenuInicialView().setVisible(true);
-            }
-        });
+        java.awt.EventQueue.invokeLater(() -> new MenuInicialView().setVisible(true));
     }
 
     public MenuInicialView() {
@@ -50,36 +47,28 @@ public class MenuInicialView extends javax.swing.JFrame {
         loginPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         loginLabel.setBackground(new java.awt.Color(35, 0, 149));
-        loginLabel.setFont(new java.awt.Font("Tahoma", 0, 24));
+        loginLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 24));
         loginLabel.setForeground(new java.awt.Color(255, 255, 255));
         loginLabel.setText("Login:");
 
         senhaLabel.setBackground(new java.awt.Color(35, 0, 149));
-        senhaLabel.setFont(new java.awt.Font("Tahoma", 0, 24));
+        senhaLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 24));
         senhaLabel.setForeground(new java.awt.Color(255, 255, 255));
         senhaLabel.setText("Senha:");
 
         entrarUsuario.setBackground(new java.awt.Color(83, 29, 255));
         entrarUsuario.setForeground(new java.awt.Color(255, 255, 255));
         entrarUsuario.setText("Entrar como Usuario");
-        entrarUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                entrarUsuarioClick(evt);
-            }
-        });
+        entrarUsuario.addActionListener(this::entrarUsuarioClick);
 
         entrarAdmin.setBackground(new java.awt.Color(83, 29, 255));
         entrarAdmin.setForeground(new java.awt.Color(255, 255, 255));
         entrarAdmin.setText("Entrar como Admin");
-        entrarAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                entrarAdminClick(evt);
-            }
-        });
+        entrarAdmin.addActionListener(this::entrarAdminClick);
 
 
         tituloLabel.setBackground(new java.awt.Color(35, 0, 149));
-        tituloLabel.setFont(new java.awt.Font("Tahoma", 0, 36));
+        tituloLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 36));
         tituloLabel.setForeground(new java.awt.Color(255, 255, 255));
         tituloLabel.setText("Covid Quiz");
 
@@ -132,23 +121,19 @@ public class MenuInicialView extends javax.swing.JFrame {
         cadastroPanel.setBackground(new java.awt.Color(35, 0, 149));
         cadastroPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        cadastroLabel.setFont(new java.awt.Font("Tahoma", 0, 18));
+        cadastroLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18));
         cadastroLabel.setForeground(new java.awt.Color(255, 255, 255));
         cadastroLabel.setText("Não tem uma conta?");
 
         cadastroButton.setBackground(new java.awt.Color(35, 0, 149));
-        cadastroButton.setFont(new java.awt.Font("Tahoma", 0, 18));
+        cadastroButton.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18));
         cadastroButton.setForeground(new java.awt.Color(83, 29, 255));
         cadastroButton.setText("Cadastre-se");
         cadastroButton.setBorder(null);
         cadastroButton.setBorderPainted(false);
         cadastroButton.setContentAreaFilled(false);
         cadastroButton.setFocusPainted(false);
-        cadastroButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadastroButtonClick(evt);
-            }
-        });
+        cadastroButton.addActionListener(this::cadastroButtonClick);
 
 
         javax.swing.GroupLayout cadastroPanelLayout = new javax.swing.GroupLayout(cadastroPanel);
@@ -206,7 +191,9 @@ public class MenuInicialView extends javax.swing.JFrame {
 
             for(Usuario u : usuariosList){
                 if(u.getLogin().equalsIgnoreCase(login) && u.getSenha().equalsIgnoreCase(new String(senha))) {
-                    JOptionPane.showMessageDialog(null, "Login realizado com sucesso! " + u.getNomeUsuario());
+                    MenuUsuarioView menuUsuarioView = new MenuUsuarioView();
+                    setVisible(false);
+                    menuUsuarioView.setVisible(true);
                 }
             }
 
