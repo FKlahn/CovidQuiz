@@ -7,8 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class MenuInicialView extends javax.swing.JFrame {
 
@@ -191,7 +189,7 @@ public class MenuInicialView extends javax.swing.JFrame {
 
             for(Usuario u : usuariosList){
                 if(u.getLogin().equalsIgnoreCase(login) && u.getSenha().equalsIgnoreCase(new String(senha))) {
-                    MenuUsuarioView menuUsuarioView = new MenuUsuarioView();
+                    MenuUsuarioView menuUsuarioView = new MenuUsuarioView(u);
                     setVisible(false);
                     menuUsuarioView.setVisible(true);
                 }
@@ -200,8 +198,6 @@ public class MenuInicialView extends javax.swing.JFrame {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Problemas na conexão com o banco. Verifique o usuário e senha!",
                     "Erro",JOptionPane.ERROR_MESSAGE);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MenuInicialView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -222,8 +218,6 @@ public class MenuInicialView extends javax.swing.JFrame {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Problemas na conexão com o banco. Verifique o usuário e senha!",
                     "Erro",JOptionPane.ERROR_MESSAGE);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MenuInicialView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

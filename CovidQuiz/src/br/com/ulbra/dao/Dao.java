@@ -12,6 +12,5 @@ public abstract class Dao<Entity> {
     }
     public abstract boolean cadastrarUsuario(Entity pojo) throws SQLException;
     public abstract boolean atualizar(Entity pojo) throws SQLException;
-    public abstract boolean excluir(Entity pojo) throws SQLException;
 
 }

@@ -9,6 +9,25 @@ import java.util.ArrayList;
 
 public class UsuarioDao extends Dao<Usuario>{
 
+    public static ArrayList<Usuario> rankearUsuarios() throws SQLException{
+        String sql = "select cq_nome_usuario, cq_pontuacao_usuario from cq_usuario where cq_tipo_usuario = ? order by cq_pontuacao_usuario desc";
+        Connection conn = ConnectionFactory.getConexao();
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ArrayList<Usuario> usuarioAux = new ArrayList<>();
+        ps.setString(1, PerfilEnum.USUARIO.getPerfil());
+
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            Usuario usuario = new Usuario();
+            usuario.setNomeUsuario(rs.getString("cq_nome_usuario"));
+            usuario.setPontuacao(rs.getInt("cq_pontuacao_usuario"));
+
+            usuarioAux.add(usuario);
+        }
+
+        return usuarioAux;
+    }
+
     public boolean cadastrarUsuario(Usuario usuario) throws SQLException, SQLIntegrityConstraintViolationException {
         PreparedStatement ps = null;
         String sql = "INSERT INTO cq_usuario (" +
@@ -47,22 +66,40 @@ public class UsuarioDao extends Dao<Usuario>{
                 }
             }
         } catch (SQLIntegrityConstraintViolationException ex) {
-            ex.printStackTrace();
             throw new SQLIntegrityConstraintViolationException();
         }
         catch (SQLException e) {
-            e.printStackTrace();
             return false;
         }
         return true;
     }
 
     public boolean atualizar(Usuario usuario) throws SQLException {
-        return false;
-    }
+        PreparedStatement ps = null;
+        String sql = "update cq_usuario set cq_pontuacao_usuario = ?, cq_dica_usuario = ?, cq_sempre_dificil_usuario = ? where cq_id_usuario = ?";
 
-    public boolean excluir(Usuario usuario) throws SQLException {
-        return false;
+        try {
+            Connection conn = this.obterConexao();
+            try {
+                ps = conn.prepareStatement(sql);
+                ps.setInt(1, usuario.getPontuacao());
+                ps.setInt(2, usuario.getDicaAtiva());
+                ps.setInt(3, usuario.getSempreDificil());
+                ps.setString(4, usuario.getId());
+
+                ps.executeUpdate();
+            } finally {
+                try {
+                    ConnectionFactory.closeConnection(conn, ps);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+
+        return true;
     }
 
     public static ArrayList<Usuario> buscarLoginUsuario() throws SQLException {

@@ -1,7 +1,11 @@
 package br.com.ulbra.view;
 
+import br.com.ulbra.controller.UsuarioController;
+import br.com.ulbra.model.Usuario;
+
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 public class MenuUsuarioView extends javax.swing.JFrame {
 
@@ -14,6 +18,7 @@ public class MenuUsuarioView extends javax.swing.JFrame {
     Icon closeConfig = new ImageIcon("src/br/com/ulbra/img/close_white_12x12.png");
     Icon settings = new ImageIcon("src/br/com/ulbra/img/settings_white_24x24.png");
     Icon exit = new ImageIcon("src/br/com/ulbra/img/exit_to_app_white_24x24.png");
+    Usuario usuarioLogado;
 
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(() -> new MenuUsuarioView().setVisible(true));
@@ -25,9 +30,15 @@ public class MenuUsuarioView extends javax.swing.JFrame {
 
     }
 
+    public MenuUsuarioView(Usuario usuario) {
+        this.usuarioLogado = usuario;
+        carregaComponentes();
+        getContentPane().setBackground(new java.awt.Color(27,0,115));
+    }
+
     private void carregaComponentes() {
 
-        javax.swing.JPanel loginPanel = new javax.swing.JPanel();
+        javax.swing.JPanel userPanel = new javax.swing.JPanel();
         javax.swing.JButton botaoSair = new javax.swing.JButton();
         javax.swing.JButton botaoConfiguracoes = new javax.swing.JButton();
         configuracoesPanel = new javax.swing.JPanel();
@@ -72,10 +83,10 @@ public class MenuUsuarioView extends javax.swing.JFrame {
         setTitle("Covid Quiz - Menu Inicial");
         setResizable(false);
 
-        loginPanel.setBackground(new java.awt.Color(35, 0, 149));
-        loginPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        loginPanel.setMinimumSize(new java.awt.Dimension(393, 355));
-        loginPanel.setPreferredSize(new java.awt.Dimension(450, 450));
+        userPanel.setBackground(new java.awt.Color(35, 0, 149));
+        userPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        userPanel.setMinimumSize(new java.awt.Dimension(393, 355));
+        userPanel.setPreferredSize(new java.awt.Dimension(450, 450));
 
         botaoSair.setPreferredSize(new java.awt.Dimension(24, 24));
         botaoSair.addActionListener(this::botaoSairActionPerformed);
@@ -149,11 +160,11 @@ public class MenuUsuarioView extends javax.swing.JFrame {
 
         cadastroLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
         cadastroLabel.setForeground(new java.awt.Color(255, 255, 255));
-        cadastroLabel.setText("Sua Pontuação: ");
+        cadastroLabel.setText("Sua Pontuação: " + this.usuarioLogado.getPontuacao());
 
         cadastroLabel1.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
         cadastroLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        cadastroLabel1.setText("Bem vindo!");
+        cadastroLabel1.setText("Bem vindo "+ this.usuarioLogado.getNomeUsuario() + "!");
 
         cadastroPerguntaBotao.setBackground(new java.awt.Color(158, 128, 255));
         cadastroPerguntaBotao.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 24)); // NOI18N
@@ -173,8 +184,8 @@ public class MenuUsuarioView extends javax.swing.JFrame {
         rankingButton.setText("Ranking");
         rankingButton.addActionListener(this::rankingButtonActionPerformed);
 
-        javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
-        loginPanel.setLayout(loginPanelLayout);
+        javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(userPanel);
+        userPanel.setLayout(loginPanelLayout);
         loginPanelLayout.setHorizontalGroup(
                 loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(loginPanelLayout.createSequentialGroup()
@@ -235,18 +246,42 @@ public class MenuUsuarioView extends javax.swing.JFrame {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap(35, Short.MAX_VALUE)
-                                .addComponent(loginPanel, 440, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(userPanel, 440, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
-                                .addComponent(loginPanel, 444, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(userPanel, 444, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
+        ajustaConfiguracoes();
+
         pack();
+    }
+
+    private void ajustaConfiguracoes() {
+        if(this.usuarioLogado.getSempreDificil() == 1) {
+            this.dificuldadeToggle.setSelected(true);
+            this.dificuldadeToggle.setIcon(this.selected);
+            this.dificuldadeToggle.setBackground(Color.green);
+        } else {
+            this.dificuldadeToggle.setSelected(false);
+            this.dificuldadeToggle.setIcon(this.notSelected);
+            this.dificuldadeToggle.setBackground(Color.red);
+        }
+
+        if(this.usuarioLogado.getDicaAtiva() == 1) {
+            this.dicaToggle.setSelected(true);
+            this.dicaToggle.setIcon(this.selected);
+            this.dicaToggle.setBackground(Color.green);
+        } else {
+            this.dicaToggle.setSelected(false);
+            this.dicaToggle.setIcon(this.notSelected);
+            this.dicaToggle.setBackground(Color.red);
+        }
     }
 
     private void botaoSairActionPerformed(java.awt.event.ActionEvent evt) {
@@ -266,7 +301,21 @@ public class MenuUsuarioView extends javax.swing.JFrame {
     }
 
     private void salvarConfiguracoesBotaoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+            this.usuarioLogado.setSempreDificil(this.dificuldadeToggle.isSelected() ? 1 : 0);
+            this.usuarioLogado.setDicaAtiva(this.dicaToggle.isSelected() ? 1 : 0);
+
+            try {
+                UsuarioController usuarioController = new UsuarioController();
+                if(usuarioController.atualizar(usuarioLogado)) {
+                    JOptionPane.showMessageDialog(null, "Configurações atualizadas com sucesso! ");
+                    this.configVisivel = !this.configVisivel;
+                    this.configuracoesPanel.setVisible(this.configVisivel);
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Problemas na conexão com o banco. Tente novamente mais tarde!",
+                        "Erro",JOptionPane.ERROR_MESSAGE);
+            }
+
     }
 
     private void dificuldadeToggleActionPerformed(java.awt.event.ActionEvent evt) {
@@ -285,7 +334,7 @@ public class MenuUsuarioView extends javax.swing.JFrame {
             this.dicaToggle.setBackground(Color.green);
         } else {
             this.dicaToggle.setIcon(this.notSelected);
-            this.dificuldadeToggle.setBackground(Color.red);
+            this.dicaToggle.setBackground(Color.red);
         }
     }
 

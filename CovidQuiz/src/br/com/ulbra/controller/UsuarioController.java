@@ -6,20 +6,23 @@ import br.com.ulbra.dao.UsuarioDao;
 import br.com.ulbra.model.Usuario;
 
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
 public class UsuarioController extends Dao<Usuario> {
 
-    public ArrayList<Usuario> buscarLoginUsuario() throws SQLException, ClassNotFoundException {
+    public ArrayList<Usuario> buscarLoginUsuario() throws SQLException {
         return UsuarioDao.buscarLoginUsuario();
     }
 
-    public ArrayList<Usuario> buscarLoginAdmin() throws SQLException, ClassNotFoundException {
+    public ArrayList<Usuario> buscarLoginAdmin() throws SQLException {
         return UsuarioDao.buscarLoginAdmin();
     }
 
-    public boolean cadastrarUsuario(Usuario usuario) throws SQLException, SQLIntegrityConstraintViolationException {
+    public ArrayList<Usuario> rankearUsuarios() throws SQLException {
+        return UsuarioDao.rankearUsuarios();
+    }
+
+    public boolean cadastrarUsuario(Usuario usuario) throws SQLException {
         boolean cadastroOk = false;
         UsuarioDao usuarioDao = new UsuarioDao();
         if(usuarioDao.cadastrarUsuario(usuario)){
@@ -30,10 +33,13 @@ public class UsuarioController extends Dao<Usuario> {
     }
 
     public boolean atualizar(Usuario usuario) throws SQLException {
-        return false;
+        boolean atualizacaoOk = false;
+        UsuarioDao usuarioDao = new UsuarioDao();
+        if(usuarioDao.atualizar(usuario)) {
+            atualizacaoOk = true;
+        }
+
+        return atualizacaoOk;
     }
 
-    public boolean excluir(Usuario usuario) throws SQLException {
-        return false;
-    }
 }
