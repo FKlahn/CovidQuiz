@@ -10,7 +10,5 @@ public abstract class Dao<Entity> {
     protected Connection obterConexao()throws SQLException {
         return ConnectionFactory.getConexao();
     }
-    public abstract boolean cadastrarUsuario(Entity pojo) throws SQLException;
-    public abstract boolean atualizar(Entity pojo) throws SQLException;
 
 }

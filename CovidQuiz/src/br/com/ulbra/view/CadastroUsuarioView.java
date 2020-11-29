@@ -44,6 +44,7 @@ public class CadastroUsuarioView extends javax.swing.JFrame {
         javax.swing.JLabel loginRedirectLabel = new javax.swing.JLabel();
         javax.swing.JButton loginButton = new javax.swing.JButton();
 
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Covid Quiz - Cadastro Usuário");
         setPreferredSize(new java.awt.Dimension(480, 800));

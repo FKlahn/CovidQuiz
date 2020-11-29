@@ -343,11 +343,15 @@ public class MenuUsuarioView extends javax.swing.JFrame {
     }
 
     private void rankingButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        RankingUsuariosView rankingUsuariosView = new RankingUsuariosView(this.usuarioLogado);
+        setVisible(false);
+        rankingUsuariosView.setVisible(true);
     }
 
     private void cadastroPerguntaBotaoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        CadastroPerguntaView cadastroPerguntaView = new CadastroPerguntaView(this.usuarioLogado);
+        setVisible(false);
+        cadastroPerguntaView.setVisible(true);
     }
 
 }

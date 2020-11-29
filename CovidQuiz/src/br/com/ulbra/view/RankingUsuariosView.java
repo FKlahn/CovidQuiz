@@ -16,6 +16,7 @@ public class RankingUsuariosView extends javax.swing.JFrame{
     private JList<String> rankingUsuariosList;
     private javax.swing.JLabel tituloLabel;
     private DefaultListModel<String> model = new DefaultListModel<>();
+    Usuario usuarioLogado;
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -30,6 +31,12 @@ public class RankingUsuariosView extends javax.swing.JFrame{
         atualizaRanking();
     }
 
+    public RankingUsuariosView(Usuario usuario) {
+        carregaComponentes();
+        atualizaRanking();
+        this.usuarioLogado = usuario;
+    }
+
     private void atualizaRanking() {
         UsuarioController usuarioController = new UsuarioController();
         try {
@@ -42,10 +49,6 @@ public class RankingUsuariosView extends javax.swing.JFrame{
             JOptionPane.showMessageDialog(null, "Problemas na conexão com o banco. Tente novamente mais tarde!",
                     "Erro",JOptionPane.ERROR_MESSAGE);
         }
-    }
-
-    public RankingUsuariosView(Usuario usuario) {
-        carregaComponentes();
     }
 
     private void carregaComponentes() {
@@ -140,7 +143,9 @@ public class RankingUsuariosView extends javax.swing.JFrame{
     }
 
     private void botaoVoltarActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        MenuUsuarioView menuUsuarioView = new MenuUsuarioView(this.usuarioLogado);
+        setVisible(false);
+        menuUsuarioView.setVisible(true);
     }
 
 }
