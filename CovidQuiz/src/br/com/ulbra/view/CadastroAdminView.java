@@ -22,6 +22,7 @@ public class CadastroAdminView extends javax.swing.JFrame {
     private static final int STATUS_INICIAL = 1;
     private static final int DICA_ATIVA_INICIAL = 1;
     private static final int SEMPRE_DIFICIL_INICIAL = 0;
+    private Usuario usuarioLogado;
 
 
     public static void main(String[] args) {
@@ -30,10 +31,11 @@ public class CadastroAdminView extends javax.swing.JFrame {
 
     public CadastroAdminView() {
         carregaComponentes();
-        getContentPane().setBackground(new java.awt.Color(27,0,115));
-        PromptSupport.setPrompt("Login", loginTextField);
-        PromptSupport.setPrompt("Senha", senhaPassword);
-        PromptSupport.setPrompt("Nome de Usuario", nomeUsuarioTextField);
+    }
+
+    public CadastroAdminView(Usuario usuario) {
+        this.usuarioLogado = usuario;
+        carregaComponentes();
     }
 
     private void carregaComponentes() {
@@ -54,7 +56,7 @@ public class CadastroAdminView extends javax.swing.JFrame {
 
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Covid Quiz - Cadastro Usuário");
+        setTitle("Covid Quiz - Cadastro Admin");
         setResizable(false);
 
         loginPanel.setBackground(new java.awt.Color(35, 0, 149));
@@ -137,6 +139,11 @@ public class CadastroAdminView extends javax.swing.JFrame {
                                 .addContainerGap(397, Short.MAX_VALUE))
         );
 
+        getContentPane().setBackground(new java.awt.Color(27,0,115));
+        PromptSupport.setPrompt("Login", loginTextField);
+        PromptSupport.setPrompt("Senha", senhaPassword);
+        PromptSupport.setPrompt("Nome de Usuario", nomeUsuarioTextField);
+
         pack();
     }
 
@@ -193,6 +200,9 @@ public class CadastroAdminView extends javax.swing.JFrame {
     }
 
     private void botaoVoltarClick(java.awt.event.ActionEvent evt) {
+        MenuAdminView menuAdminView = new MenuAdminView(this.usuarioLogado);
+        setVisible(false);
+        menuAdminView.setVisible(true);
     }
 
 }

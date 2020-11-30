@@ -7,7 +7,9 @@ import br.com.ulbra.util.ConnectionFactory;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class UsuarioDao extends Dao<Usuario>{
+public class UsuarioDao extends Dao {
+
+    private static final int BONUS_PERGUNTA_ADICIONADA = 30;
 
     public static ArrayList<Usuario> rankearUsuarios() throws SQLException{
         String sql = "select cq_nome_usuario, cq_pontuacao_usuario from cq_usuario where cq_tipo_usuario = ? order by cq_pontuacao_usuario desc";
@@ -28,7 +30,31 @@ public class UsuarioDao extends Dao<Usuario>{
         return usuarioAux;
     }
 
-    public boolean cadastrarUsuario(Usuario usuario) throws SQLException, SQLIntegrityConstraintViolationException {
+    public void darPontosUsuario(String idUsuario) throws SQLException{
+        PreparedStatement ps = null;
+        String sql = "update cq_usuario set cq_pontuacao_usuario = cq_pontuacao_usuario + ? where cq_id_usuario = ?";
+
+        try {
+            Connection conn = obterConexao();
+            try {
+                ps = conn.prepareStatement(sql);
+                ps.setInt(1, BONUS_PERGUNTA_ADICIONADA);
+                ps.setString(2, idUsuario);
+
+                ps.executeUpdate();
+            } finally {
+                try {
+                    ConnectionFactory.closeConnection(conn, ps);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (SQLException e) {
+            throw new SQLException();
+        }
+    }
+
+    public boolean cadastrarUsuario(Usuario usuario) throws SQLException {
         PreparedStatement ps = null;
         String sql = "INSERT INTO cq_usuario (" +
                 "cq_id_usuario, " +
@@ -43,7 +69,7 @@ public class UsuarioDao extends Dao<Usuario>{
                 "values(?,?,?,?,?,?,?,?,?)";
 
         try {
-            Connection conn = this.obterConexao();
+            Connection conn = obterConexao();
             try {
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, usuario.getId());
@@ -74,12 +100,12 @@ public class UsuarioDao extends Dao<Usuario>{
         return true;
     }
 
-    public boolean atualizar(Usuario usuario) throws SQLException {
+    public boolean atualizar(Usuario usuario) {
         PreparedStatement ps = null;
         String sql = "update cq_usuario set cq_pontuacao_usuario = ?, cq_dica_usuario = ?, cq_sempre_dificil_usuario = ? where cq_id_usuario = ?";
 
         try {
-            Connection conn = this.obterConexao();
+            Connection conn = obterConexao();
             try {
                 ps = conn.prepareStatement(sql);
                 ps.setInt(1, usuario.getPontuacao());

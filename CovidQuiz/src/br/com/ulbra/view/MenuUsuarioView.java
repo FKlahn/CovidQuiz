@@ -5,7 +5,6 @@ import br.com.ulbra.model.Usuario;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.SQLException;
 
 public class MenuUsuarioView extends javax.swing.JFrame {
 
@@ -13,12 +12,12 @@ public class MenuUsuarioView extends javax.swing.JFrame {
     private boolean configVisivel = false;
     private javax.swing.JToggleButton dificuldadeToggle = new javax.swing.JToggleButton();
     private javax.swing.JToggleButton dicaToggle = new javax.swing.JToggleButton();
-    Icon selected = new ImageIcon("src/br/com/ulbra/img/done_white_18x18.png");
-    Icon notSelected = new ImageIcon("src/br/com/ulbra/img/close_white_18x18.png");
-    Icon closeConfig = new ImageIcon("src/br/com/ulbra/img/close_white_12x12.png");
-    Icon settings = new ImageIcon("src/br/com/ulbra/img/settings_white_24x24.png");
-    Icon exit = new ImageIcon("src/br/com/ulbra/img/exit_to_app_white_24x24.png");
-    Usuario usuarioLogado;
+    private Icon selected = new ImageIcon("src/br/com/ulbra/img/done_white_18x18.png");
+    private Icon notSelected = new ImageIcon("src/br/com/ulbra/img/close_white_18x18.png");
+    private Icon closeConfig = new ImageIcon("src/br/com/ulbra/img/close_white_12x12.png");
+    private Icon settings = new ImageIcon("src/br/com/ulbra/img/settings_white_24x24.png");
+    private Icon exit = new ImageIcon("src/br/com/ulbra/img/exit_to_app_white_24x24.png");
+    private Usuario usuarioLogado;
 
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(() -> new MenuUsuarioView().setVisible(true));
@@ -80,7 +79,7 @@ public class MenuUsuarioView extends javax.swing.JFrame {
         this.configuracoesPanel.setVisible(configVisivel);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Covid Quiz - Menu Inicial");
+        setTitle("Covid Quiz - Menu Usuário");
         setResizable(false);
 
         userPanel.setBackground(new java.awt.Color(35, 0, 149));
@@ -304,17 +303,12 @@ public class MenuUsuarioView extends javax.swing.JFrame {
             this.usuarioLogado.setSempreDificil(this.dificuldadeToggle.isSelected() ? 1 : 0);
             this.usuarioLogado.setDicaAtiva(this.dicaToggle.isSelected() ? 1 : 0);
 
-            try {
-                UsuarioController usuarioController = new UsuarioController();
-                if(usuarioController.atualizar(usuarioLogado)) {
-                    JOptionPane.showMessageDialog(null, "Configurações atualizadas com sucesso! ");
-                    this.configVisivel = !this.configVisivel;
-                    this.configuracoesPanel.setVisible(this.configVisivel);
-                }
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Problemas na conexão com o banco. Tente novamente mais tarde!",
-                        "Erro",JOptionPane.ERROR_MESSAGE);
-            }
+        UsuarioController usuarioController = new UsuarioController();
+        if(usuarioController.atualizar(usuarioLogado)) {
+            JOptionPane.showMessageDialog(null, "Configurações atualizadas com sucesso! ");
+            this.configVisivel = !this.configVisivel;
+            this.configuracoesPanel.setVisible(this.configVisivel);
+        }
 
     }
 

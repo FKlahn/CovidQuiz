@@ -10,20 +10,12 @@ import java.util.ArrayList;
 
 public class RankingUsuariosView extends javax.swing.JFrame{
 
-    private javax.swing.JButton botaoVoltar;
-    private javax.swing.JScrollPane listaScrollPanel;
-    private javax.swing.JPanel rankingPanel;
     private JList<String> rankingUsuariosList;
-    private javax.swing.JLabel tituloLabel;
     private DefaultListModel<String> model = new DefaultListModel<>();
     Usuario usuarioLogado;
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RankingUsuariosView().setVisible(true);
-            }
-        });
+    public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(() -> new RankingUsuariosView().setVisible(true));
     }
 
     public RankingUsuariosView() {
@@ -53,11 +45,10 @@ public class RankingUsuariosView extends javax.swing.JFrame{
 
     private void carregaComponentes() {
 
-        rankingPanel = new javax.swing.JPanel();
-        tituloLabel = new javax.swing.JLabel();
-        listaScrollPanel = new javax.swing.JScrollPane();
+        JPanel rankingPanel = new JPanel();
+        JLabel tituloLabel = new JLabel();
+        JScrollPane listaScrollPanel = new JScrollPane();
         rankingUsuariosList = new javax.swing.JList<>();
-        botaoVoltar = new javax.swing.JButton();
         Icon botaoVoltarIcon = new ImageIcon("src/br/com/ulbra/img/arrow_back_white_24x24.png");
         javax.swing.JButton botaoVoltar = new javax.swing.JButton(botaoVoltarIcon);
         botaoVoltar.setBorder(null);
@@ -73,20 +64,16 @@ public class RankingUsuariosView extends javax.swing.JFrame{
         rankingPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         tituloLabel.setBackground(new java.awt.Color(35, 0, 149));
-        tituloLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        tituloLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 36)); // NOI18N
         tituloLabel.setForeground(new java.awt.Color(255, 255, 255));
         tituloLabel.setText("Ranking");
 
         rankingUsuariosList.setBackground(new java.awt.Color(193, 174, 255));
-        rankingUsuariosList.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        rankingUsuariosList.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
         rankingUsuariosList.setForeground(new java.awt.Color(255, 255, 255));
         listaScrollPanel.setViewportView(rankingUsuariosList);
 
-        botaoVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoVoltarActionPerformed(evt);
-            }
-        });
+        botaoVoltar.addActionListener(this::botaoVoltarActionPerformed);
 
         javax.swing.GroupLayout rankingPanelLayout = new javax.swing.GroupLayout(rankingPanel);
         rankingPanel.setLayout(rankingPanelLayout);
@@ -136,7 +123,7 @@ public class RankingUsuariosView extends javax.swing.JFrame{
         );
 
         getContentPane().setBackground(new java.awt.Color(27,0,115));
-        this.listaScrollPanel.getHorizontalScrollBar().setBackground(new Color(83,29,255));
+        listaScrollPanel.getHorizontalScrollBar().setBackground(new Color(83,29,255));
         this.rankingUsuariosList.setSelectionBackground(new Color(158,128,255));
 
         pack();

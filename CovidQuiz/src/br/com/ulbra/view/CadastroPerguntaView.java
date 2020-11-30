@@ -24,14 +24,13 @@ public class CadastroPerguntaView extends javax.swing.JFrame {
     private javax.swing.JButton botaoExcluir;
     private javax.swing.JButton botaoNovo;
     private javax.swing.JButton botaoSalvar;
-    private javax.swing.JButton botaoVoltar;
-    private javax.swing.JComboBox dificuldadeComboBox;
-    private javax.swing.JLabel dificuldadeLabel;
+    private JComboBox<String> dificuldadeComboBox;
     private javax.swing.JTextField perguntaTextField;
     private javax.swing.JTable perguntasTable;
     private Usuario usuarioLogado;
     private DefaultTableModel model;
     private Pergunta perguntaSelecionada;
+
 
     public static void main(String[] args) {
 
@@ -91,16 +90,16 @@ public class CadastroPerguntaView extends javax.swing.JFrame {
             PerguntaController perguntaController = new PerguntaController();
             ArrayList<Pergunta> perguntasUsuario = perguntaController.listarPerguntasUsuario(usuarioLogado);
             model = (DefaultTableModel) perguntasTable.getModel();
-            for (int i = 0; i < perguntasUsuario.size(); i++) {
+            for (Pergunta pergunta : perguntasUsuario) {
                 model.addRow(new Object[]{
-                        perguntasUsuario.get(i).getId(),
-                        perguntasUsuario.get(i).getPergunta(),
-                        perguntasUsuario.get(i).getAlternativa1(),
-                        perguntasUsuario.get(i).getAlternativa2(),
-                        perguntasUsuario.get(i).getAlternativa3(),
-                        perguntasUsuario.get(i).getAlternativaCorreta(),
-                        perguntasUsuario.get(i).getDificuldadePergunta() == 1 ? "FÁCIL" : perguntasUsuario.get(i).getDificuldadePergunta() == 2 ? "MÉDIO" : "DIFÍCIL",
-                        perguntasUsuario.get(i).getStatusPergunta() == 0 ? "NEGADA" : perguntasUsuario.get(i).getStatusPergunta() == 1 ? "ACEITA" : "EM AVALIAÇÃO"});
+                        pergunta.getId(),
+                        pergunta.getPergunta(),
+                        pergunta.getAlternativa1(),
+                        pergunta.getAlternativa2(),
+                        pergunta.getAlternativa3(),
+                        pergunta.getAlternativaCorreta(),
+                        pergunta.getDificuldadePergunta() == 1 ? "FÁCIL" : pergunta.getDificuldadePergunta() == 2 ? "MÉDIO" : "DIFÍCIL",
+                        pergunta.getStatusPergunta() == 0 ? "NEGADA" : pergunta.getStatusPergunta() == 1 ? "ACEITA" : "EM AVALIAÇÃO"});
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Problemas na conexão com o banco. Tente novamente mais tarde!",
@@ -112,7 +111,6 @@ public class CadastroPerguntaView extends javax.swing.JFrame {
     private void carregaComponentes() {
 
         JPanel cadastroPanel = new JPanel();
-        botaoVoltar = new javax.swing.JButton();
         JPanel menuAcoesPanel = new JPanel();
         botaoNovo = new javax.swing.JButton();
         botaoEditar = new javax.swing.JButton();
@@ -123,8 +121,8 @@ public class CadastroPerguntaView extends javax.swing.JFrame {
         alternativa2TextField = new javax.swing.JTextField();
         alternativa3TextField = new javax.swing.JTextField();
         alternativaCorretaTextField = new javax.swing.JTextField();
-        dificuldadeComboBox = new javax.swing.JComboBox();
-        dificuldadeLabel = new javax.swing.JLabel();
+        dificuldadeComboBox = new javax.swing.JComboBox<>();
+        JLabel dificuldadeLabel = new JLabel();
         botaoCancelar = new javax.swing.JButton();
         botaoAtualizar = new javax.swing.JButton();
         botaoAtualizar.setEnabled(false);
@@ -235,7 +233,9 @@ public class CadastroPerguntaView extends javax.swing.JFrame {
 
         dificuldadeComboBox.setBackground(new java.awt.Color(158, 128, 255));
         dificuldadeComboBox.setForeground(Color.WHITE);
-        dificuldadeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"FÁCIL", "MÉDIO", "DIFÍCIL"}));
+        dificuldadeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"FÁCIL", "MÉDIO", "DIFÍCIL"}));
+        JTextField txtOff = (JTextField) dificuldadeComboBox.getEditor().getEditorComponent();
+        txtOff.setEditable(false);
 
         dificuldadeLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
         dificuldadeLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -334,7 +334,7 @@ public class CadastroPerguntaView extends javax.swing.JFrame {
         perguntasTable.setSelectionBackground(new java.awt.Color(83, 29, 255));
         perguntasTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                perguntasTableMouseClicked(evt);
+                perguntasTableMouseClicked();
             }
         });
         jScrollPane1.setViewportView(perguntasTable);
@@ -621,7 +621,7 @@ public class CadastroPerguntaView extends javax.swing.JFrame {
             pergunta.setIdUsuario(usuarioLogado.getId());
             try {
                 if (perguntaController.cadastrarPergunta(pergunta)) {
-                    model.addRow(new Object[]{perguntaController.getIdPergunta(pergunta.getIdUsuario()), pergunta.getPergunta(), pergunta.getAlternativa1(), pergunta.getAlternativa2(), pergunta.getAlternativa3(), pergunta.getAlternativaCorreta(),pergunta.getDificuldadePergunta() == 1 ? "FÁCIL" : pergunta.getDificuldadePergunta() == 2 ? "MÉDIO" : "DIFÍCIL", "EM AVALIAÇÃO"});
+                    model.addRow(new Object[]{perguntaController.getIdPergunta(pergunta.getIdUsuario()), pergunta.getPergunta(), pergunta.getAlternativa1(), pergunta.getAlternativa2(), pergunta.getAlternativa3(), pergunta.getAlternativaCorreta(), pergunta.getDificuldadePergunta() == 1 ? "FÁCIL" : pergunta.getDificuldadePergunta() == 2 ? "MÉDIO" : "DIFÍCIL", "EM AVALIAÇÃO"});
                     JOptionPane.showMessageDialog(null, "A pergunta " + pergunta.getPergunta() + " foi criada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 }
             } catch (SQLException e) {
@@ -634,7 +634,7 @@ public class CadastroPerguntaView extends javax.swing.JFrame {
         }
     }
 
-    private void perguntasTableMouseClicked(java.awt.event.MouseEvent evt) {
+    private void perguntasTableMouseClicked() {
         limpaCampos();
         desativaCamposCadastro();
         this.botaoExcluir.setEnabled(true);

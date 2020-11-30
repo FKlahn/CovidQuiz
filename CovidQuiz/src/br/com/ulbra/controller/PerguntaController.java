@@ -8,7 +8,7 @@ import br.com.ulbra.model.Usuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class PerguntaController extends Dao<Pergunta> {
+public class PerguntaController extends Dao {
     public boolean cadastrarPergunta(Pergunta pergunta) throws SQLException {
         boolean cadastroOk = false;
         PerguntaDao perguntaDao = new PerguntaDao();
@@ -33,5 +33,9 @@ public class PerguntaController extends Dao<Pergunta> {
 
     public int getIdPergunta(String idUsuario) throws SQLException {
         return PerguntaDao.getIdPergunta(idUsuario);
+    }
+
+    public ArrayList<Pergunta> listarPerguntasAdmin() throws SQLException{
+        return PerguntaDao.listarPerguntasAdmin();
     }
 }

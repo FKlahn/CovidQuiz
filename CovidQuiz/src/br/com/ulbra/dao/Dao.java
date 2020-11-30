@@ -3,11 +3,10 @@ package br.com.ulbra.dao;
 import br.com.ulbra.util.ConnectionFactory;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
-public abstract class Dao<Entity> {
+public abstract class Dao {
 
-    protected static Connection obterConexao()throws SQLException {
+    protected static Connection obterConexao() {
         return ConnectionFactory.getConexao();
     }
 

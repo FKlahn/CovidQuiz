@@ -211,7 +211,9 @@ public class MenuInicialView extends javax.swing.JFrame {
 
             for(Usuario u : usuariosList){
                 if(u.getLogin().equalsIgnoreCase(login) && u.getSenha().equalsIgnoreCase(new String(senha))) {
-                    JOptionPane.showMessageDialog(null, "Login realizado com sucesso! " + u.getNomeUsuario());
+                    MenuAdminView menuAdminView = new MenuAdminView(u);
+                    setVisible(false);
+                    menuAdminView.setVisible(true);
                 }
             }
 

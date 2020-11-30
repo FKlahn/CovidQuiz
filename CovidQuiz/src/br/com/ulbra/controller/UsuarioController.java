@@ -8,7 +8,7 @@ import br.com.ulbra.model.Usuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class UsuarioController extends Dao<Usuario> {
+public class UsuarioController extends Dao {
 
     public ArrayList<Usuario> buscarLoginUsuario() throws SQLException {
         return UsuarioDao.buscarLoginUsuario();
@@ -32,7 +32,7 @@ public class UsuarioController extends Dao<Usuario> {
         return cadastroOk;
     }
 
-    public boolean atualizar(Usuario usuario) throws SQLException {
+    public boolean atualizar(Usuario usuario) {
         boolean atualizacaoOk = false;
         UsuarioDao usuarioDao = new UsuarioDao();
         if(usuarioDao.atualizar(usuario)) {
@@ -42,4 +42,8 @@ public class UsuarioController extends Dao<Usuario> {
         return atualizacaoOk;
     }
 
+    public void darPontosUsuario(String idUsuario) throws SQLException{
+        UsuarioDao usuarioDao = new UsuarioDao();
+        usuarioDao.darPontosUsuario(idUsuario);
+    }
 }
