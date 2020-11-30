@@ -12,14 +12,26 @@ public class PerguntaController extends Dao<Pergunta> {
     public boolean cadastrarPergunta(Pergunta pergunta) throws SQLException {
         boolean cadastroOk = false;
         PerguntaDao perguntaDao = new PerguntaDao();
-        if(perguntaDao.cadastrarPergunta(pergunta)) {
+        if (perguntaDao.cadastrarPergunta(pergunta)) {
             cadastroOk = true;
         }
 
         return cadastroOk;
     }
 
-    public ArrayList<Pergunta> listarPerguntasUsuario(Usuario usuario) throws SQLException{
-       return PerguntaDao.listarPerguntasUsuario(usuario);
+    public ArrayList<Pergunta> listarPerguntasUsuario(Usuario usuario) throws SQLException {
+        return PerguntaDao.listarPerguntasUsuario(usuario);
+    }
+
+    public boolean atualizarPergunta(Pergunta pergunta) throws SQLException {
+        return PerguntaDao.atualizarPergunta(pergunta);
+    }
+
+    public boolean deletarPergunta(int idPergunta) throws SQLException {
+        return PerguntaDao.deletarPergunta(idPergunta);
+    }
+
+    public int getIdPergunta(String idUsuario) throws SQLException {
+        return PerguntaDao.getIdPergunta(idUsuario);
     }
 }

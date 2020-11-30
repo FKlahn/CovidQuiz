@@ -10,8 +10,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class CadastroPerguntaView extends javax.swing.JFrame{
+public class CadastroPerguntaView extends javax.swing.JFrame {
+    private static final int STATUS_EM_AVALIACAO = 2;
     private javax.swing.JTextField alternativa1TextField;
     private javax.swing.JTextField alternativa2TextField;
     private javax.swing.JTextField alternativa3TextField;
@@ -89,20 +91,20 @@ public class CadastroPerguntaView extends javax.swing.JFrame{
             PerguntaController perguntaController = new PerguntaController();
             ArrayList<Pergunta> perguntasUsuario = perguntaController.listarPerguntasUsuario(usuarioLogado);
             model = (DefaultTableModel) perguntasTable.getModel();
-           for(int i = 0; i<perguntasUsuario.size(); i++){
-               model.addRow(new Object[] {
-                       perguntasUsuario.get(i).getId(),
-                       perguntasUsuario.get(i).getPergunta(),
-                       perguntasUsuario.get(i).getAlternativa1(),
-                       perguntasUsuario.get(i).getAlternativa2(),
-                       perguntasUsuario.get(i).getAlternativa3(),
-                       perguntasUsuario.get(i).getAlternativaCorreta(),
-                       perguntasUsuario.get(i).getDificuldadePergunta() == 1 ? "FÁCIL" : perguntasUsuario.get(i).getDificuldadePergunta() == 2 ? "MÉDIO" : "DIFÍCIL",
-                       perguntasUsuario.get(i).getStatusPergunta() == 0 ? "NEGADA" : perguntasUsuario.get(i).getStatusPergunta() == 1 ? "ACEITA" : "EM AVALIAÇÃO" });
-           }
+            for (int i = 0; i < perguntasUsuario.size(); i++) {
+                model.addRow(new Object[]{
+                        perguntasUsuario.get(i).getId(),
+                        perguntasUsuario.get(i).getPergunta(),
+                        perguntasUsuario.get(i).getAlternativa1(),
+                        perguntasUsuario.get(i).getAlternativa2(),
+                        perguntasUsuario.get(i).getAlternativa3(),
+                        perguntasUsuario.get(i).getAlternativaCorreta(),
+                        perguntasUsuario.get(i).getDificuldadePergunta() == 1 ? "FÁCIL" : perguntasUsuario.get(i).getDificuldadePergunta() == 2 ? "MÉDIO" : "DIFÍCIL",
+                        perguntasUsuario.get(i).getStatusPergunta() == 0 ? "NEGADA" : perguntasUsuario.get(i).getStatusPergunta() == 1 ? "ACEITA" : "EM AVALIAÇÃO"});
+            }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Problemas na conexão com o banco. Tente novamente mais tarde!",
-                    "Erro",JOptionPane.ERROR_MESSAGE);
+                    "Erro", JOptionPane.ERROR_MESSAGE);
         }
 
     }
@@ -233,7 +235,7 @@ public class CadastroPerguntaView extends javax.swing.JFrame{
 
         dificuldadeComboBox.setBackground(new java.awt.Color(158, 128, 255));
         dificuldadeComboBox.setForeground(Color.WHITE);
-        dificuldadeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "FÁCIL", "MÉDIO", "DIFÍCIL" }));
+        dificuldadeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"FÁCIL", "MÉDIO", "DIFÍCIL"}));
 
         dificuldadeLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
         dificuldadeLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -313,18 +315,18 @@ public class CadastroPerguntaView extends javax.swing.JFrame{
 
         perguntasTable.setBackground(new java.awt.Color(158, 128, 255));
         perguntasTable.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
+                new Object[][]{
                 },
-                new String [] {
+                new String[]{
                         "Codigo", "Pergunta", "Alternativa 1", "Alternativa 2", "Alternativa 3", "Alternativa Correta", "Dificuldade", "Status"
                 }
         ) {
-            Class[] types = new Class [] {
+            Class[] types = new Class[]{
                     java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
         });
         perguntasTable.getColumnModel().removeColumn(perguntasTable.getColumn("Codigo"));
@@ -393,7 +395,7 @@ public class CadastroPerguntaView extends javax.swing.JFrame{
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().setBackground(new java.awt.Color(27,0,115));
+        getContentPane().setBackground(new java.awt.Color(27, 0, 115));
         PromptSupport.setPrompt("Pergunta", perguntaTextField);
         PromptSupport.setPrompt("Alternativa 1", alternativa1TextField);
         PromptSupport.setPrompt("Alternativa 2", alternativa2TextField);
@@ -410,27 +412,27 @@ public class CadastroPerguntaView extends javax.swing.JFrame{
     }
 
     private void perguntaTextFieldKeyTyped(java.awt.event.KeyEvent evt) {
-        if(this.perguntaTextField.getText().length() >= 110)
+        if (this.perguntaTextField.getText().length() >= 110)
             evt.consume();
     }
 
     private void alternativa1TextFieldKeyTyped(java.awt.event.KeyEvent evt) {
-        if(this.alternativa1TextField.getText().length() >= 40)
+        if (this.alternativa1TextField.getText().length() >= 40)
             evt.consume();
     }
 
     private void alternativa2TextFieldKeyTyped(java.awt.event.KeyEvent evt) {
-        if(this.alternativa2TextField.getText().length() >= 40)
+        if (this.alternativa2TextField.getText().length() >= 40)
             evt.consume();
     }
 
     private void alternativa3TextFieldKeyTyped(java.awt.event.KeyEvent evt) {
-        if(this.alternativa3TextField.getText().length() >= 40)
+        if (this.alternativa3TextField.getText().length() >= 40)
             evt.consume();
     }
 
     private void alternativaCorretaTextFieldKeyTyped(java.awt.event.KeyEvent evt) {
-        if(this.alternativaCorretaTextField.getText().length() >= 40)
+        if (this.alternativaCorretaTextField.getText().length() >= 40)
             evt.consume();
     }
 
@@ -448,9 +450,11 @@ public class CadastroPerguntaView extends javax.swing.JFrame{
         this.alternativa2TextField.setText(perguntaSelecionada.getAlternativa2());
         this.alternativa3TextField.setText(perguntaSelecionada.getAlternativa3());
         this.alternativaCorretaTextField.setText(perguntaSelecionada.getAlternativaCorreta());
-        this.dificuldadeComboBox.setSelectedIndex(perguntaSelecionada.getDificuldadePergunta()-1);
+        this.dificuldadeComboBox.setSelectedIndex(perguntaSelecionada.getDificuldadePergunta() - 1);
         this.botaoNovo.setEnabled(false);
         ativaCamposCadastro();
+        this.botaoSalvar.setEnabled(false);
+        this.botaoAtualizar.setEnabled(true);
 
     }
 
@@ -458,11 +462,20 @@ public class CadastroPerguntaView extends javax.swing.JFrame{
         String msg = "Deletar a pergunta: " + perguntaSelecionada.getPergunta() + "(?)";
         int opcaoEscolhida = JOptionPane.showConfirmDialog(null, msg, "Exclusão", JOptionPane.YES_NO_OPTION);
         if (opcaoEscolhida == JOptionPane.YES_OPTION) {
-            if(perguntaSelecionada.getStatusPergunta() == 1 ) {
+            if (perguntaSelecionada.getStatusPergunta() == 1) {
                 JOptionPane.showMessageDialog(null, "Não é possível excluir perguntas já aprovadas ",
-                        "Erro",JOptionPane.ERROR_MESSAGE);
+                        "Erro", JOptionPane.ERROR_MESSAGE);
             } else {
-                System.out.println("excluindo Pergunta");
+                try {
+                    PerguntaController perguntaController = new PerguntaController();
+                    if (perguntaController.deletarPergunta(perguntaSelecionada.getId())) {
+                        JOptionPane.showMessageDialog(null, "A pergunta " + perguntaSelecionada.getPergunta() + " foi Deletada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                        model.removeRow(perguntasTable.getSelectedRow());
+                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro, tente novamente mais tarde",
+                            "Erro", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }
@@ -487,12 +500,138 @@ public class CadastroPerguntaView extends javax.swing.JFrame{
     }
 
     private void botaoAtualizarClick(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        String msg = "Atualizar a pergunta: " + perguntaSelecionada.getPergunta() + "(?)";
+        int opcaoEscolhida = JOptionPane.showConfirmDialog(null, msg, "Atualização", JOptionPane.YES_NO_OPTION);
+        if (opcaoEscolhida == JOptionPane.YES_OPTION) {
+            if (perguntaSelecionada.getStatusPergunta() == 1) {
+                JOptionPane.showMessageDialog(null, "Não é possível atualizar perguntas já aprovadas ",
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+            } else {
+                String perguntatxt = perguntaTextField.getText();
+                String alternativa1 = alternativa1TextField.getText();
+                String alternativa2 = alternativa2TextField.getText();
+                String alternativa3 = alternativa3TextField.getText();
+                String alternativaCorreta = alternativaCorretaTextField.getText();
+                String dificuldade = Objects.requireNonNull(dificuldadeComboBox.getSelectedItem()).toString();
+                String camposRestantes = "";
+                boolean isTodosOsCamposPreenchidos = true;
+
+                if (perguntatxt.isEmpty()) {
+                    isTodosOsCamposPreenchidos = false;
+                    camposRestantes = "Login";
+                }
+
+                if (alternativa1.isEmpty()) {
+                    isTodosOsCamposPreenchidos = false;
+                    camposRestantes = camposRestantes + " Alternativa 1";
+                }
+
+                if (alternativa2.isEmpty()) {
+                    isTodosOsCamposPreenchidos = false;
+                    camposRestantes = camposRestantes + " Alternativa 2";
+                }
+
+                if (alternativa3.isEmpty()) {
+                    isTodosOsCamposPreenchidos = false;
+                    camposRestantes = camposRestantes + " Alternativa 3";
+                }
+
+                if (alternativaCorreta.isEmpty()) {
+                    isTodosOsCamposPreenchidos = false;
+                    camposRestantes = camposRestantes + " Alternativa Correta";
+                }
+
+                if (isTodosOsCamposPreenchidos) {
+                    PerguntaController perguntaController = new PerguntaController();
+                    perguntaSelecionada.setPergunta(perguntatxt);
+                    perguntaSelecionada.setAlternativa1(alternativa1);
+                    perguntaSelecionada.setAlternativa2(alternativa2);
+                    perguntaSelecionada.setAlternativa3(alternativa3);
+                    perguntaSelecionada.setAlternativaCorreta(alternativaCorreta);
+                    perguntaSelecionada.setStatusPergunta(STATUS_EM_AVALIACAO);
+                    perguntaSelecionada.setDificuldadePergunta(dificuldade.equals("FÁCIL") ? 1 : dificuldade.equals("MÉDIO") ? 2 : 3);
+                    try {
+                        if (perguntaController.atualizarPergunta(perguntaSelecionada)) {
+                            model.setValueAt(perguntaSelecionada.getPergunta(), perguntasTable.getSelectedRow(), 1);
+                            model.setValueAt(perguntaSelecionada.getAlternativa1(), perguntasTable.getSelectedRow(), 2);
+                            model.setValueAt(perguntaSelecionada.getAlternativa2(), perguntasTable.getSelectedRow(), 3);
+                            model.setValueAt(perguntaSelecionada.getAlternativa3(), perguntasTable.getSelectedRow(), 4);
+                            model.setValueAt(perguntaSelecionada.getAlternativaCorreta(), perguntasTable.getSelectedRow(), 5);
+                            model.setValueAt(perguntaSelecionada.getDificuldadePergunta() == 1 ? "FÁCIL" : perguntaSelecionada.getDificuldadePergunta() == 2 ? "MÉDIO" : "DIFÍCIL", perguntasTable.getSelectedRow(), 6);
+                            model.setValueAt("EM AVALIAÇÃO", perguntasTable.getSelectedRow(), 7);
+                            JOptionPane.showMessageDialog(null, "A pergunta " + perguntaSelecionada.getPergunta() + " foi Atualizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null, "Ocorreu um erro, tente novamente mais tarde",
+                                "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Preencha todos os campos! Campos restantes: " + camposRestantes,
+                            "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
     }
 
     private void botaoSalvarClick(java.awt.event.ActionEvent evt) {
-        System.out.println(dificuldadeComboBox.getSelectedItem() == "FÁCIL" ? 1 : dificuldadeComboBox.getSelectedItem() == "MÉDIO" ? 2 : 3);
-        System.out.println(dificuldadeComboBox.getSelectedIndex());
+        String perguntatxt = perguntaTextField.getText();
+        String alternativa1 = alternativa1TextField.getText();
+        String alternativa2 = alternativa2TextField.getText();
+        String alternativa3 = alternativa3TextField.getText();
+        String alternativaCorreta = alternativaCorretaTextField.getText();
+        String dificuldade = Objects.requireNonNull(dificuldadeComboBox.getSelectedItem()).toString();
+        String camposRestantes = "";
+        boolean isTodosOsCamposPreenchidos = true;
+
+        if (perguntatxt.isEmpty()) {
+            isTodosOsCamposPreenchidos = false;
+            camposRestantes = "Login";
+        }
+
+        if (alternativa1.isEmpty()) {
+            isTodosOsCamposPreenchidos = false;
+            camposRestantes = camposRestantes + " Alternativa 1";
+        }
+
+        if (alternativa2.isEmpty()) {
+            isTodosOsCamposPreenchidos = false;
+            camposRestantes = camposRestantes + " Alternativa 2";
+        }
+
+        if (alternativa3.isEmpty()) {
+            isTodosOsCamposPreenchidos = false;
+            camposRestantes = camposRestantes + " Alternativa 3";
+        }
+
+        if (alternativaCorreta.isEmpty()) {
+            isTodosOsCamposPreenchidos = false;
+            camposRestantes = camposRestantes + " Alternativa Correta";
+        }
+
+        if (isTodosOsCamposPreenchidos) {
+            PerguntaController perguntaController = new PerguntaController();
+            Pergunta pergunta = new Pergunta();
+            pergunta.setPergunta(perguntatxt);
+            pergunta.setAlternativa1(alternativa1);
+            pergunta.setAlternativa2(alternativa2);
+            pergunta.setAlternativa3(alternativa3);
+            pergunta.setAlternativaCorreta(alternativaCorreta);
+            pergunta.setStatusPergunta(STATUS_EM_AVALIACAO);
+            pergunta.setDificuldadePergunta(dificuldade.equals("FÁCIL") ? 1 : dificuldade.equals("MÉDIO") ? 2 : 3);
+            pergunta.setIdUsuario(usuarioLogado.getId());
+            try {
+                if (perguntaController.cadastrarPergunta(pergunta)) {
+                    model.addRow(new Object[]{perguntaController.getIdPergunta(pergunta.getIdUsuario()), pergunta.getPergunta(), pergunta.getAlternativa1(), pergunta.getAlternativa2(), pergunta.getAlternativa3(), pergunta.getAlternativaCorreta(),pergunta.getDificuldadePergunta() == 1 ? "FÁCIL" : pergunta.getDificuldadePergunta() == 2 ? "MÉDIO" : "DIFÍCIL", "EM AVALIAÇÃO"});
+                    JOptionPane.showMessageDialog(null, "A pergunta " + pergunta.getPergunta() + " foi criada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Ocorreu um erro, tente novamente mais tarde",
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos! Campos restantes: " + camposRestantes,
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void perguntasTableMouseClicked(java.awt.event.MouseEvent evt) {
@@ -512,8 +651,8 @@ public class CadastroPerguntaView extends javax.swing.JFrame{
         perguntaSelecionada.setAlternativa2(perguntasTable.getValueAt(perguntasTable.getSelectedRow(), 2).toString());
         perguntaSelecionada.setAlternativa3(perguntasTable.getValueAt(perguntasTable.getSelectedRow(), 3).toString());
         perguntaSelecionada.setAlternativaCorreta(perguntasTable.getValueAt(perguntasTable.getSelectedRow(), 4).toString());
-        String dificuldade = perguntasTable.getValueAt(perguntasTable.getSelectedRow(),5).toString();
-        String status = perguntasTable.getValueAt(perguntasTable.getSelectedRow(),6).toString();
+        String dificuldade = perguntasTable.getValueAt(perguntasTable.getSelectedRow(), 5).toString();
+        String status = perguntasTable.getValueAt(perguntasTable.getSelectedRow(), 6).toString();
         perguntaSelecionada.setDificuldadePergunta(dificuldade.equals("FÁCIL") ? 1 : dificuldade.equals("MÉDIO") ? 2 : 3);
         perguntaSelecionada.setStatusPergunta(status.equals("ACEITA") ? 1 : status.equals("NEGADA") ? 0 : 2);
 

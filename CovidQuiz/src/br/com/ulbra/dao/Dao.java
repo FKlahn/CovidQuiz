@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public abstract class Dao<Entity> {
 
-    protected Connection obterConexao()throws SQLException {
+    protected static Connection obterConexao()throws SQLException {
         return ConnectionFactory.getConexao();
     }
 
