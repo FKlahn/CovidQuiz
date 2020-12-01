@@ -149,6 +149,35 @@ public class PerguntaDao extends Dao {
         return idPergunta;
     }
 
+    public static Pergunta carregarPergunta(String id) throws SQLException{
+        Pergunta perguntaCarregada = new Pergunta();
+        PreparedStatement ps;
+        String sql = "select cq_id_pergunta, cq_pergunta, cq_alternativa1, cq_alternativa2, cq_alternativa3, cq_alternativa_correta, cq_dificuldade_pergunta from cq_pergunta where cq_status_pergunta = 1 and cq_id_pergunta not in (select cq_id_pergunta from cq_pergunta_respondida where cq_id_usuario = ?) and rownum = 1";
+
+        try {
+            Connection conn = obterConexao();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()) {
+                perguntaCarregada.setId(rs.getInt("cq_id_pergunta"));
+                perguntaCarregada.setPergunta(rs.getString("cq_pergunta"));
+                perguntaCarregada.setAlternativa1(rs.getString("cq_alternativa1"));
+                perguntaCarregada.setAlternativa2(rs.getString("cq_alternativa2"));
+                perguntaCarregada.setAlternativa3(rs.getString("cq_alternativa3"));
+                perguntaCarregada.setAlternativaCorreta(rs.getString("cq_alternativa_correta"));
+                perguntaCarregada.setDificuldadePergunta(rs.getInt("cq_dificuldade_pergunta"));
+            }
+
+        }catch (SQLException e) {
+            throw new SQLException(e);
+        }
+
+        return perguntaCarregada;
+    }
+
     public boolean cadastrarPergunta(Pergunta pergunta) throws SQLException {
         PreparedStatement ps = null;
         String sql = "INSERT INTO cq_pergunta (" +

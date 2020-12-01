@@ -42,8 +42,13 @@ public class UsuarioController extends Dao {
         return atualizacaoOk;
     }
 
-    public void darPontosUsuario(String idUsuario) throws SQLException{
+    public void darPontosUsuario(String idUsuario, int pontos) throws SQLException{
         UsuarioDao usuarioDao = new UsuarioDao();
-        usuarioDao.darPontosUsuario(idUsuario);
+        usuarioDao.darPontosUsuario(idUsuario, pontos);
+    }
+
+    public void cadastrarPerguntaVisualizada(String idUsuario, int idPergunta) throws SQLException{
+        UsuarioDao usuarioDao = new UsuarioDao();
+        usuarioDao.cadastrarPerguntaVisualizada(idUsuario,idPergunta);
     }
 }

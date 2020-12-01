@@ -417,22 +417,22 @@ public class CadastroPerguntaView extends javax.swing.JFrame {
     }
 
     private void alternativa1TextFieldKeyTyped(java.awt.event.KeyEvent evt) {
-        if (this.alternativa1TextField.getText().length() >= 40)
+        if (this.alternativa1TextField.getText().length() >= 70)
             evt.consume();
     }
 
     private void alternativa2TextFieldKeyTyped(java.awt.event.KeyEvent evt) {
-        if (this.alternativa2TextField.getText().length() >= 40)
+        if (this.alternativa2TextField.getText().length() >= 70)
             evt.consume();
     }
 
     private void alternativa3TextFieldKeyTyped(java.awt.event.KeyEvent evt) {
-        if (this.alternativa3TextField.getText().length() >= 40)
+        if (this.alternativa3TextField.getText().length() >= 70)
             evt.consume();
     }
 
     private void alternativaCorretaTextFieldKeyTyped(java.awt.event.KeyEvent evt) {
-        if (this.alternativaCorretaTextField.getText().length() >= 40)
+        if (this.alternativaCorretaTextField.getText().length() >= 70)
             evt.consume();
     }
 

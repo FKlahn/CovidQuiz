@@ -38,4 +38,8 @@ public class PerguntaController extends Dao {
     public ArrayList<Pergunta> listarPerguntasAdmin() throws SQLException{
         return PerguntaDao.listarPerguntasAdmin();
     }
+
+    public Pergunta carregarPergunta(String id) throws SQLException{
+        return PerguntaDao.carregarPergunta(id);
+    }
 }

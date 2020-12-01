@@ -9,8 +9,6 @@ import java.util.ArrayList;
 
 public class UsuarioDao extends Dao {
 
-    private static final int BONUS_PERGUNTA_ADICIONADA = 30;
-
     public static ArrayList<Usuario> rankearUsuarios() throws SQLException{
         String sql = "select cq_nome_usuario, cq_pontuacao_usuario from cq_usuario where cq_tipo_usuario = ? order by cq_pontuacao_usuario desc";
         Connection conn = ConnectionFactory.getConexao();
@@ -30,7 +28,7 @@ public class UsuarioDao extends Dao {
         return usuarioAux;
     }
 
-    public void darPontosUsuario(String idUsuario) throws SQLException{
+    public void darPontosUsuario(String idUsuario, int pontos) throws SQLException{
         PreparedStatement ps = null;
         String sql = "update cq_usuario set cq_pontuacao_usuario = cq_pontuacao_usuario + ? where cq_id_usuario = ?";
 
@@ -38,7 +36,7 @@ public class UsuarioDao extends Dao {
             Connection conn = obterConexao();
             try {
                 ps = conn.prepareStatement(sql);
-                ps.setInt(1, BONUS_PERGUNTA_ADICIONADA);
+                ps.setInt(1, pontos);
                 ps.setString(2, idUsuario);
 
                 ps.executeUpdate();
@@ -180,5 +178,34 @@ public class UsuarioDao extends Dao {
         }
 
         return usuarioAux;
+    }
+
+    public void cadastrarPerguntaVisualizada(String idUsuario, int idPergunta) throws SQLException{
+        PreparedStatement ps = null;
+        String sql = "INSERT INTO CQ_PERGUNTA_RESPONDIDA (cq_id_pergunta, cq_id_usuario) VALUES (?, ?)";
+
+        try {
+            Connection conn = obterConexao();
+            try {
+                ps = conn.prepareStatement(sql);
+                ps.setInt(1, idPergunta);
+                ps.setString(2, idUsuario);
+
+
+                ps.executeUpdate();
+
+            } finally {
+                try {
+                    ConnectionFactory.closeConnection(conn, ps);
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            throw new SQLIntegrityConstraintViolationException();
+        }
+        catch (SQLException e) {
+            throw new SQLException();
+        }
     }
 }

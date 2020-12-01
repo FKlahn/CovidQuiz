@@ -333,7 +333,9 @@ public class MenuUsuarioView extends javax.swing.JFrame {
     }
 
     private void novoJogoBotaoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        JogoView jogoView = new JogoView(this.usuarioLogado);
+        setVisible(false);
+        jogoView.setVisible(true);
     }
 
     private void rankingButtonActionPerformed(java.awt.event.ActionEvent evt) {

@@ -21,6 +21,8 @@ public class AutorizarPerguntasView extends javax.swing.JFrame {
     private Pergunta perguntaSelecionada;
     private static final int STATUS_NEGADA = 0;
     private static final int STATUS_APROVADA = 1;
+    private static final int BONUS_PERGUNTA_ADICIONADA = 30;
+
 
     public static void main(String[] args) {
 
@@ -271,7 +273,7 @@ public class AutorizarPerguntasView extends javax.swing.JFrame {
     private void darPontosUsuario() {
         try {
             UsuarioController usuarioController = new UsuarioController();
-            usuarioController.darPontosUsuario(perguntaSelecionada.getIdUsuario());
+            usuarioController.darPontosUsuario(perguntaSelecionada.getIdUsuario(), BONUS_PERGUNTA_ADICIONADA );
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Problemas na conexão com o banco. Tente novamente mais tarde!",
                     "Erro", JOptionPane.ERROR_MESSAGE);
