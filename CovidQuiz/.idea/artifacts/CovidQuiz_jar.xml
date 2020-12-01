@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CovidQuiz:jar">
+    <output-path>$USER_HOME$/Desktop</output-path>
+    <root id="archive" name="CovidQuiz.jar">
+      <element id="module-output" name="CovidQuiz" />
+      <element id="extracted-dir" path="$USER_HOME$/Documents/swingx-1.6.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Documents/ojdbc6.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

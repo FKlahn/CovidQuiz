@@ -62,7 +62,7 @@ public class AutorizarPerguntasView extends javax.swing.JFrame {
         cadastroPanel.setPreferredSize(new java.awt.Dimension(450, 450));
 
 
-        Icon botaoVoltarIcon = new ImageIcon("src/br/com/ulbra/img/arrow_back_white_24x24.png");
+        Icon botaoVoltarIcon = new ImageIcon(getClass().getResource("/arrow_back_white_24x24.png"));
         javax.swing.JButton botaoVoltar = new javax.swing.JButton(botaoVoltarIcon);
         botaoVoltar.setBorder(null);
         botaoVoltar.setBorderPainted(false);
@@ -131,7 +131,7 @@ public class AutorizarPerguntasView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(perguntasTable);
 
-        tituloLabel.setFont(new Font("Tahoma", Font.PLAIN, 24)); // NOI18N
+        tituloLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
         tituloLabel.setForeground(new java.awt.Color(255, 255, 255));
         tituloLabel.setText("Covid Quiz - Autorizar perguntas");
 

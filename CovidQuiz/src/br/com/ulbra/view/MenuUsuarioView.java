@@ -12,11 +12,11 @@ public class MenuUsuarioView extends javax.swing.JFrame {
     private boolean configVisivel = false;
     private javax.swing.JToggleButton dificuldadeToggle = new javax.swing.JToggleButton();
     private javax.swing.JToggleButton dicaToggle = new javax.swing.JToggleButton();
-    private Icon selected = new ImageIcon("src/br/com/ulbra/img/done_white_18x18.png");
-    private Icon notSelected = new ImageIcon("src/br/com/ulbra/img/close_white_18x18.png");
-    private Icon closeConfig = new ImageIcon("src/br/com/ulbra/img/close_white_12x12.png");
-    private Icon settings = new ImageIcon("src/br/com/ulbra/img/settings_white_24x24.png");
-    private Icon exit = new ImageIcon("src/br/com/ulbra/img/exit_to_app_white_24x24.png");
+    private Icon selected = new ImageIcon(getClass().getResource("/done_white_18x18.png"));
+    private Icon notSelected = new ImageIcon(getClass().getResource("/close_white_18x18.png"));
+    private Icon closeConfig = new ImageIcon(getClass().getResource("/close_white_12x12.png"));
+    private Icon settings = new ImageIcon(getClass().getResource("/settings_white_24x24.png"));
+    private Icon exit = new ImageIcon(getClass().getResource("/exit_to_app_white_24x24.png"));
     private Usuario usuarioLogado;
 
     public static void main(String[] args) {
@@ -107,11 +107,11 @@ public class MenuUsuarioView extends javax.swing.JFrame {
         dicaToggle.setPreferredSize(new java.awt.Dimension(24, 24));
         dicaToggle.addActionListener(this::dicaToggleActionPerformed);
 
-        modoDificlLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
+        modoDificlLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18));
         modoDificlLabel.setForeground(new java.awt.Color(255, 255, 255));
         modoDificlLabel.setText("Modo difícil:");
 
-        dicaLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
+        dicaLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18));
         dicaLabel.setForeground(new java.awt.Color(255, 255, 255));
         dicaLabel.setText("Dica ativa:");
 
@@ -157,28 +157,28 @@ public class MenuUsuarioView extends javax.swing.JFrame {
                                 .addContainerGap())
         );
 
-        cadastroLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
+        cadastroLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18));
         cadastroLabel.setForeground(new java.awt.Color(255, 255, 255));
         cadastroLabel.setText("Sua Pontuação: " + this.usuarioLogado.getPontuacao());
 
-        cadastroLabel1.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
+        cadastroLabel1.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18));
         cadastroLabel1.setForeground(new java.awt.Color(255, 255, 255));
         cadastroLabel1.setText("Bem vindo "+ this.usuarioLogado.getNomeUsuario() + "!");
 
         cadastroPerguntaBotao.setBackground(new java.awt.Color(158, 128, 255));
-        cadastroPerguntaBotao.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 24)); // NOI18N
+        cadastroPerguntaBotao.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 24));
         cadastroPerguntaBotao.setForeground(new java.awt.Color(255, 255, 255));
         cadastroPerguntaBotao.setText("Cadastrar Pergunta");
         cadastroPerguntaBotao.addActionListener(this::cadastroPerguntaBotaoActionPerformed);
 
         novoJogoBotao.setBackground(new java.awt.Color(158, 128, 255));
-        novoJogoBotao.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 24)); // NOI18N
+        novoJogoBotao.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 24));
         novoJogoBotao.setForeground(new java.awt.Color(255, 255, 255));
         novoJogoBotao.setText("Novo Jogo");
         novoJogoBotao.addActionListener(this::novoJogoBotaoActionPerformed);
 
         rankingButton.setBackground(new java.awt.Color(158, 128, 255));
-        rankingButton.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 24)); // NOI18N
+        rankingButton.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 24));
         rankingButton.setForeground(new java.awt.Color(255, 255, 255));
         rankingButton.setText("Ranking");
         rankingButton.addActionListener(this::rankingButtonActionPerformed);

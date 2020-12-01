@@ -12,9 +12,9 @@ import java.util.Random;
 
 public class JogoView extends javax.swing.JFrame {
 
-    private Icon botaoVoltarIcon = new ImageIcon("src/br/com/ulbra/img/arrow_back_white_24x24.png");
-    private Icon botaoCartasIcon = new ImageIcon("src/br/com/ulbra/img/poker-cards.png");
-    private Icon botaoUniversitarios = new ImageIcon("src/br/com/ulbra/img/people_white_24x24.png");
+    private Icon botaoVoltarIcon = new ImageIcon(getClass().getResource("/arrow_back_white_24x24.png"));
+    private Icon botaoCartasIcon = new ImageIcon(getClass().getResource("/poker-cards.png"));
+    private Icon botaoUniversitarios = new ImageIcon(getClass().getResource("/people_white_24x24.png"));
     private javax.swing.JButton voltarBotao = new javax.swing.JButton(botaoVoltarIcon);
     private javax.swing.JPanel cadastroPanel = new javax.swing.JPanel();
     private javax.swing.JPanel perguntaPanel = new javax.swing.JPanel();
@@ -76,29 +76,29 @@ public class JogoView extends javax.swing.JFrame {
         voltarBotao.addActionListener(this::voltarBotaoClick);
 
         perguntaPanel.setBackground(new java.awt.Color(83, 29, 255));
-        perguntaPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, this.perguntaCarregada.getDificuldadePergunta() == 1 ? "FÁCIL" : this.perguntaCarregada.getDificuldadePergunta() == 2 ? "MÉDIO" : "DIFÍCIL", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", Font.PLAIN, 24), this.perguntaCarregada.getDificuldadePergunta() == 1 ? Color.GREEN : this.perguntaCarregada.getDificuldadePergunta() == 2 ? Color.YELLOW : Color.RED)); // NOI18N
-        perguntaPanel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 24)); // NOI18N
+        perguntaPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, this.perguntaCarregada.getDificuldadePergunta() == 1 ? "FÁCIL" : this.perguntaCarregada.getDificuldadePergunta() == 2 ? "MÉDIO" : "DIFÍCIL", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", Font.PLAIN, 24), this.perguntaCarregada.getDificuldadePergunta() == 1 ? Color.GREEN : this.perguntaCarregada.getDificuldadePergunta() == 2 ? Color.YELLOW : Color.RED));
+        perguntaPanel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 24));
 
         alternativa1Botao.setBackground(new java.awt.Color(158, 128, 255));
-        alternativa1Botao.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
+        alternativa1Botao.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18));
         alternativa1Botao.setForeground(new java.awt.Color(255, 255, 255));
         alternativa1Botao.setText(this.perguntaCarregada.getAlternativa1());
         alternativa1Botao.addActionListener(evt2 -> alternativa1BotaoClick());
 
         alternativa3Botao.setBackground(new java.awt.Color(158, 128, 255));
-        alternativa3Botao.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
+        alternativa3Botao.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18));
         alternativa3Botao.setForeground(new java.awt.Color(255, 255, 255));
         alternativa3Botao.setText(this.perguntaCarregada.getAlternativa3());
         alternativa3Botao.addActionListener(this::alternativa3BotaoClick);
 
         alternativa2Botao.setBackground(new java.awt.Color(158, 128, 255));
-        alternativa2Botao.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
+        alternativa2Botao.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18));
         alternativa2Botao.setForeground(new java.awt.Color(255, 255, 255));
         alternativa2Botao.setText(this.perguntaCarregada.getAlternativa2());
         alternativa2Botao.addActionListener(evt1 -> alternativa2BotaoClick());
 
         alternativaCorretaBotao.setBackground(new java.awt.Color(158, 128, 255));
-        alternativaCorretaBotao.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
+        alternativaCorretaBotao.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18));
         alternativaCorretaBotao.setForeground(new java.awt.Color(255, 255, 255));
         alternativaCorretaBotao.setText(this.perguntaCarregada.getAlternativaCorreta());
         alternativaCorretaBotao.addActionListener(evt -> alternativaCorretaBotaoClick());
@@ -137,30 +137,29 @@ public class JogoView extends javax.swing.JFrame {
         perguntaTextArea.setEditable(false);
         perguntaTextArea.setBackground(new java.awt.Color(158, 128, 255));
         perguntaTextArea.setColumns(20);
-        perguntaTextArea.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
+        perguntaTextArea.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18));
         perguntaTextArea.setForeground(new java.awt.Color(255, 255, 255));
         perguntaTextArea.setRows(5);
         perguntaTextArea.setText(this.perguntaCarregada.getPergunta());
         jScrollPane1.setViewportView(perguntaTextArea);
 
         proximaPerguntaBotao.setBackground(new java.awt.Color(158, 128, 255));
-        proximaPerguntaBotao.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
-        proximaPerguntaBotao.setForeground(new java.awt.Color(255, 255, 255));
+        proximaPerguntaBotao.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18));
         proximaPerguntaBotao.setText("Proxima pergunta");
         proximaPerguntaBotao.setEnabled(false);
         proximaPerguntaBotao.addActionListener(this::proximaPerguntaBotaoClick);
 
         voltarAoMenuBotao.setBackground(new java.awt.Color(158, 128, 255));
-        voltarAoMenuBotao.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
+        voltarAoMenuBotao.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18));
         voltarAoMenuBotao.setForeground(new java.awt.Color(255, 255, 255));
         voltarAoMenuBotao.setText("Voltar ao menu");
         voltarAoMenuBotao.setEnabled(false);
         voltarAoMenuBotao.addActionListener(evt -> voltarAoMenuBotaoClick());
 
-        descricaoDicasLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14)); // NOI18N
+        descricaoDicasLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
         descricaoDicasLabel.setForeground(new java.awt.Color(255, 255, 255));
 
-        dicasLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14)); // NOI18N
+        dicasLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
         dicasLabel.setForeground(new java.awt.Color(255, 255, 255));
 
         int preset = gerarvalorRandomico(3);
@@ -182,11 +181,11 @@ public class JogoView extends javax.swing.JFrame {
                 break;
         }
 
-        usuarioLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 24)); // NOI18N
+        usuarioLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 24));
         usuarioLabel.setForeground(new java.awt.Color(255, 255, 255));
         usuarioLabel.setText(this.usuarioLogado.getNomeUsuario());
 
-        pontuacaoLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 24)); // NOI18N
+        pontuacaoLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 24));
         pontuacaoLabel.setForeground(new java.awt.Color(255, 255, 255));
         pontuacaoLabel.setText("Pontuação: " + this.usuarioLogado.getPontuacao());
 
@@ -449,7 +448,7 @@ public class JogoView extends javax.swing.JFrame {
 
 
     private void cartasBotaoMouseEntered() {
-        descricaoDicasLabel.setText("Cartas: Será selecionado uma carta aleatória, podendo tirar de 1 à 3 opções incorretas. Custo: " + CUSTO_DICA_CARTAS + " Pontos");
+        descricaoDicasLabel.setText("Cartas: Carta aleatória, podendo tirar de 1 à 3 opções incorretas. Custo: " + CUSTO_DICA_CARTAS + " Pontos");
     }
 
     private void cartasBotaoMouseExited() {

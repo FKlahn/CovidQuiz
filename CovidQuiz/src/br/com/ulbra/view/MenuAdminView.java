@@ -43,7 +43,7 @@ public class MenuAdminView extends javax.swing.JFrame {
         menuPanel.setMinimumSize(new java.awt.Dimension(393, 355));
         menuPanel.setPreferredSize(new java.awt.Dimension(450, 450));
 
-        Icon exit = new ImageIcon("src/br/com/ulbra/img/exit_to_app_white_24x24.png");
+        Icon exit = new ImageIcon(getClass().getResource("/exit_to_app_white_24x24.png"));
         botaoSair.setPreferredSize(new java.awt.Dimension(24, 24));
         botaoSair.setIcon(exit);
         botaoSair.setBorder(null);

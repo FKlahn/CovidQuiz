@@ -130,7 +130,7 @@ public class CadastroPerguntaView extends javax.swing.JFrame {
         JScrollPane jScrollPane1 = new JScrollPane();
         perguntasTable = new javax.swing.JTable();
         JLabel tituloLabel = new JLabel();
-        Icon botaoVoltarIcon = new ImageIcon("src/br/com/ulbra/img/arrow_back_white_24x24.png");
+        Icon botaoVoltarIcon = new ImageIcon(getClass().getResource("/arrow_back_white_24x24.png"));
         javax.swing.JButton botaoVoltar = new javax.swing.JButton(botaoVoltarIcon);
         botaoVoltar.setBorder(null);
         botaoVoltar.setBorderPainted(false);
@@ -237,7 +237,7 @@ public class CadastroPerguntaView extends javax.swing.JFrame {
         JTextField txtOff = (JTextField) dificuldadeComboBox.getEditor().getEditorComponent();
         txtOff.setEditable(false);
 
-        dificuldadeLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
+        dificuldadeLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18));
         dificuldadeLabel.setForeground(new java.awt.Color(255, 255, 255));
         dificuldadeLabel.setText("Dificuldade:");
 
@@ -339,7 +339,7 @@ public class CadastroPerguntaView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(perguntasTable);
 
-        tituloLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 24)); // NOI18N
+        tituloLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 24));
         tituloLabel.setForeground(new java.awt.Color(255, 255, 255));
         tituloLabel.setText("Covid Quiz - Cadastro de perguntas");
 

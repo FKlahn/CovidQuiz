@@ -59,12 +59,12 @@ public class CadastroUsuarioView extends javax.swing.JFrame {
         cadastrarUsuario.addActionListener(this::cadastrarClick);
 
         tituloLabel.setBackground(new java.awt.Color(35, 0, 149));
-        tituloLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 36)); // NOI18N
+        tituloLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 36));
         tituloLabel.setForeground(new java.awt.Color(255, 255, 255));
         tituloLabel.setText("Covid Quiz");
 
         subtituloLabel.setBackground(new java.awt.Color(35, 0, 149));
-        subtituloLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
+        subtituloLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18));
         subtituloLabel.setForeground(new java.awt.Color(255, 255, 255));
         subtituloLabel.setText("Cadastre-se para participar");
 
@@ -110,12 +110,12 @@ public class CadastroUsuarioView extends javax.swing.JFrame {
         cadastroPanel.setBackground(new java.awt.Color(35, 0, 149));
         cadastroPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        loginRedirectLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
+        loginRedirectLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18));
         loginRedirectLabel.setForeground(new java.awt.Color(255, 255, 255));
         loginRedirectLabel.setText("Já tem uma conta?");
 
         loginButton.setBackground(new java.awt.Color(35, 0, 149));
-        loginButton.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
+        loginButton.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18));
         loginButton.setForeground(new java.awt.Color(83, 29, 255));
         loginButton.setText("Conecte-se");
         loginButton.setBorder(null);

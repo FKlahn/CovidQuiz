@@ -47,7 +47,7 @@ public class CadastroAdminView extends javax.swing.JFrame {
         javax.swing.JLabel tituloLabel = new javax.swing.JLabel();
         nomeUsuarioTextField = new javax.swing.JTextField();
         javax.swing.JLabel subtituloLabel = new javax.swing.JLabel();
-        Icon botaoVoltarIcon = new ImageIcon("src/br/com/ulbra/img/arrow_back_white_24x24.png");
+        Icon botaoVoltarIcon = new ImageIcon(getClass().getResource("/arrow_back_white_24x24.png"));
         javax.swing.JButton botaoVoltar = new javax.swing.JButton(botaoVoltarIcon);
         botaoVoltar.setBorder(null);
         botaoVoltar.setBorderPainted(false);
@@ -68,12 +68,12 @@ public class CadastroAdminView extends javax.swing.JFrame {
         cadastrarUsuario.addActionListener(this::cadastrarClick);
 
         tituloLabel.setBackground(new java.awt.Color(35, 0, 149));
-        tituloLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 36)); // NOI18N
+        tituloLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 36));
         tituloLabel.setForeground(new java.awt.Color(255, 255, 255));
         tituloLabel.setText("Covid Quiz");
 
         subtituloLabel.setBackground(new java.awt.Color(35, 0, 149));
-        subtituloLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
+        subtituloLabel.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18));
         subtituloLabel.setForeground(new java.awt.Color(255, 255, 255));
         subtituloLabel.setText("Cadastre um novo administrador");
 
